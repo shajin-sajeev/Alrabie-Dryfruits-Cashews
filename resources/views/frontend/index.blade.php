@@ -1,132 +1,147 @@
 @extends('layouts.app')
 
-@section('title', 'Home - Al Rabie Dry Fruits & Nuts')
+@section('title', 'Al Rabie - Premium Dry Fruits & Nuts')
 
 @section('content')
 
 <!-- Hero Section -->
 <section class="hero">
     <div class="hero-content">
-        <h1>Premium Dry Fruits & Nuts</h1>
-        <p>Discover the finest collection of organic dry fruits, premium nuts, and imported chocolates for your table</p>
+        <h1>Premium Nature, <br>Delivered Daily.</h1>
+        <p>Discover our artisanal collection of hand-picked dry fruits, organic nuts, and imported chocolates. Perfection in every bite.</p>
         <div class="cta-buttons">
-            <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
-            <button class="btn btn-secondary" onclick="document.getElementById('categories').scrollIntoView({behavior: 'smooth'})">Explore Categories</button>
+            <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                <span>Shop Collection</span>
+                <i class="fas fa-shopping-bag"></i>
+            </button>
+            <button class="btn btn-secondary" onclick="document.getElementById('categories').scrollIntoView({behavior: 'smooth'})">
+                <span>Browse Categories</span>
+                <i class="fas fa-grid-2"></i>
+            </button>
         </div>
     </div>
 </section>
 
 <!-- Categories Section -->
 <section id="categories" class="categories-section">
-    <h2 class="section-title">Our Categories</h2>
+    <div class="section-header" style="text-align: center; margin-bottom: 4rem;">
+        <h2 class="section-title">Exclusive Categories</h2>
+        <p class="section-subtitle">Specially curated selections for every occasion</p>
+    </div>
+
     <div class="categories-grid">
         @forelse ($categories as $category)
-            <div class="category-card" onclick="window.location.href='{{ route('category', $category->slug) }}'">
-                @if ($category->image)
-                    <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" class="category-image">
-                @else
-                    <div class="category-image" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);"></div>
-                @endif
-                <div class="category-content">
-                    <h3>{{ $category->name }}</h3>
-                    <p>{{ $category->description ? Str::limit($category->description, 60) : 'Explore this category' }}</p>
-                    <a href="{{ route('category', $category->slug) }}" class="btn btn-small" style="display: inline-block;">View Products →</a>
-                </div>
+        <div class="category-card" onclick="window.location.href='{{ route('category', $category->slug) }}'">
+            @if ($category->image)
+            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" class="category-image">
+            @else
+            <div class="category-image" style="background: linear-gradient(135deg, #10b981 0%, #064e3b 100%);"></div>
+            @endif
+            <div class="category-content">
+                <h3>{{ $category->name }}</h3>
+                <p>{{ $category->description ? Str::limit($category->description, 60) : 'Explore our premium selection.' }}</p>
+                <a href="{{ route('category', $category->slug) }}" class="info-link" style="color: white; font-weight: 700;">
+                    <span>Explore Collection</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
+        </div>
         @empty
-            <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No categories available</p>
+        <div style="grid-column: 1/-1; text-align: center; padding: 4rem; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-color);">
+            <i class="fas fa-box-open" style="font-size: 3rem; color: var(--border-color); margin-bottom: 1rem; display: block;"></i>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">No categories available at the moment.</p>
+        </div>
         @endforelse
     </div>
 </section>
 
 <!-- Products Section -->
 <section id="products" class="products-section">
-    <div class="section-header">
-        <h2 class="section-title">Featured Products</h2>
-        <p class="section-subtitle">Handpicked selections of premium quality dry fruits and nuts</p>
+    <div class="section-header" style="text-align: center; margin-bottom: 4rem;">
+        <h2 class="section-title">Featured Selections</h2>
+        <p class="section-subtitle">The freshest picks from the current harvest</p>
     </div>
-    
+
     <div class="products-grid">
         @forelse ($products as $product)
-            <x-product-card :product="$product" />
+        <x-product-card :product="$product" />
         @empty
-            <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem 0;">No products available</p>
+        <div style="grid-column: 1/-1; text-align: center; padding: 4rem; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-color);">
+            <i class="fas fa-search" style="font-size: 3rem; color: var(--border-color); margin-bottom: 1rem; display: block;"></i>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">No featured products found.</p>
+        </div>
         @endforelse
     </div>
 
     <!-- Pagination -->
     @if ($products->hasPages())
-        <div class="pagination">
-            @if ($products->onFirstPage())
-                <span style="opacity: 0.5; cursor: not-allowed;">← Previous</span>
-            @else
-                <a href="{{ $products->previousPageUrl() }}">← Previous</a>
-            @endif
+    <div class="pagination">
+        @if ($products->onFirstPage())
+        <span class="page-link disabled"><i class="fas fa-chevron-left"></i></span>
+        @else
+        <a href="{{ $products->previousPageUrl() }}" class="page-link"><i class="fas fa-chevron-left"></i></a>
+        @endif
 
-            @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
-                @if ($page == $products->currentPage())
-                    <span class="active">{{ $page }}</span>
-                @else
-                    <a href="{{ $url }}">{{ $page }}</a>
-                @endif
-            @endforeach
+        @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+        @if ($page == $products->currentPage())
+        <span class="active">{{ $page }}</span>
+        @else
+        <a href="{{ $url }}">{{ $page }}</a>
+        @endif
+        @endforeach
 
-            @if ($products->hasMorePages())
-                <a href="{{ $products->nextPageUrl() }}">Next →</a>
-            @else
-                <span style="opacity: 0.5; cursor: not-allowed;">Next →</span>
-            @endif
-        </div>
+        @if ($products->hasMorePages())
+        <a href="{{ $products->nextPageUrl() }}" class="page-link"><i class="fas fa-chevron-right"></i></a>
+        @else
+        <span class="page-link disabled"><i class="fas fa-chevron-right"></i></span>
+        @endif
+    </div>
     @endif
 </section>
 
 <!-- Contact Section -->
 <section id="contact" class="contact-section">
     <div class="contact-container">
-        <div class="section-header">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="section-subtitle">Have questions? We'd love to hear from you. Contact us today!</p>
+        <div class="section-header" style="text-align: center; margin-bottom: 5rem;">
+            <h2 class="section-title">Elevate Your Experience</h2>
+            <p class="section-subtitle">Need assistance? Our concierge team is here to help.</p>
         </div>
-        
+
         <div class="contact-content">
             <div class="contact-info">
                 <div class="info-item">
-                    <div class="info-icon">📧</div>
+                    <div class="info-icon"><i class="fas fa-envelope-open-text"></i></div>
                     <div class="info-details">
-                        <h3>Email Us</h3>
-                        <p>Have a question? Send us an email and we'll respond as quickly as possible.</p>
+                        <h3>Mail Inquiry</h3>
+                        <p>Our experts will respond within 12 business hours.</p>
                         <a href="mailto:info@alrabie.com" class="info-link">info@alrabie.com</a>
                     </div>
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon">📱</div>
+                    <div class="info-icon"><i class="fas fa-phone-volume"></i></div>
                     <div class="info-details">
-                        <h3>Call Us</h3>
-                        <p>Available Monday - Sunday, 9:00 AM - 9:00 PM (Saudi Arabia Time)</p>
+                        <h3>Direct Call</h3>
+                        <p>Speak with our customer relations team directly.</p>
                         <a href="tel:+966501234567" class="info-link">+966 50 123 4567</a>
                     </div>
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon">💬</div>
+                    <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
                     <div class="info-details">
-                        <h3>WhatsApp</h3>
-                        <p>Chat with us on WhatsApp for instant support</p>
-                        <a href="https://wa.me/966501234567" target="_blank" class="info-link">Start Chat</a>
+                        <h3>Instant Concierge</h3>
+                        <p>Message us on WhatsApp for 24/7 priority support.</p>
+                        <a href="https://wa.me/966501234567" target="_blank" class="info-link">Start Priority Chat</a>
                     </div>
                 </div>
 
                 <div class="info-item">
-                    <div class="info-icon">📍</div>
+                    <div class="info-icon"><i class="fas fa-map-location-dot"></i></div>
                     <div class="info-details">
-                        <h3>Location</h3>
-                        <p>Visit us in Saudi Arabia</p>
-                        <span class="info-text">Saudi Arabia, Riyadh</span>
-                    </div>
-                </div>
-            </div>
-
+                        <h3>Flagship Store</h3>
+                        <p>Visit our flagship store in the heart of Riyadh.</p>
+                        <span class="info-text" style="color: var(--text-main); font-weight: 600;">King Fahd Road, Riyadh, KSA</span>
                     </div>
                 </div>
             </div>
@@ -135,4 +150,3 @@
 </section>
 
 @endsection
-

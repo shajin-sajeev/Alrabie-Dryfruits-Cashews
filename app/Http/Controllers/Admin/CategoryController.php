@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -78,14 +78,14 @@ class CategoryController extends Controller
             unlink(public_path($category->image));
         }
         $category->delete();
-        
+
         if (request()->expectsJson()) {
             return response()->json([
                 'success' => true,
                 'message' => 'Category deleted successfully.'
             ]);
         }
-        
+
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
     }
 }
