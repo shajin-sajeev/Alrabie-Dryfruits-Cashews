@@ -6,7 +6,100 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAdminFeatures();
     initializeFormValidation();
     initializeImagePreview();
+    initializeDeleteButtons();
 });
+
+// ===================================
+// DELETE WITH AJAX & SWEETALERT
+// ===================================
+
+function initializeDeleteButtons() {
+    const deleteButtons = document.querySelectorAll('.btn-delete-ajax');
+    
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const itemName = this.getAttribute('data-item-name');
+            const url = this.getAttribute('data-url');
+            const itemType = this.getAttribute('data-item-type') || 'item';
+            
+            Swal.fire({
+                title: 'Delete ' + itemType.charAt(0).toUpperCase() + itemType.slice(1) + '?',
+                html: `<p style="color: #666; font-size: 0.95rem;">You are about to delete <strong>${itemName}</strong></p>
+                       <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">This action cannot be undone.</p>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: '<i class="fas fa-trash"></i> Delete',
+                cancelButtonText: '<i class="fas fa-times"></i> Cancel',
+                htmlContent: true,
+                allowOutsideClick: false,
+                allowEscapeKey: true,
+                didOpen: (modal) => {
+                    const confirmBtn = modal.querySelector('[data-swal-role="confirm"]');
+                    if (confirmBtn) {
+                        confirmBtn.innerHTML = '<i class="fas fa-trash" style="margin-right: 0.5rem;"></i> Delete';
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    performDelete(url, itemName, itemType);
+                }
+            });
+        });
+    });
+}
+
+function performDelete(url, itemName, itemType) {
+    // Show loading state
+    Swal.fire({
+        title: 'Deleting...',
+        icon: 'info',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Delete failed');
+        }
+        return response.json();
+    })
+    .then(data => {
+        Swal.fire({
+            title: 'Deleted!',
+            html: `<p style="color: #333;">${itemType.charAt(0).toUpperCase() + itemType.slice(1)} <strong>${itemName}</strong> has been deleted.</p>`,
+            icon: 'success',
+            confirmButtonColor: '#10b981',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            location.reload();
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            title: 'Error!',
+            html: '<p style="color: #333;">Failed to delete the ' + itemType + '. Please try again.</p>',
+            icon: 'error',
+            confirmButtonColor: '#10b981',
+            confirmButtonText: 'OK'
+        });
+    });
+}
 
 // ===================================
 // ADMIN FEATURES

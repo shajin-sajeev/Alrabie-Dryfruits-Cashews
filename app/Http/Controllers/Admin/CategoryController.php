@@ -9,11 +9,6 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
-
     public function index()
     {
         $categories = Category::all();
@@ -83,6 +78,14 @@ class CategoryController extends Controller
             unlink(public_path($category->image));
         }
         $category->delete();
+        
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Category deleted successfully.'
+            ]);
+        }
+        
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
     }
 }

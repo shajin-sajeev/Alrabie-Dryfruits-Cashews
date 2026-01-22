@@ -33,7 +33,7 @@
             <h1 class="product-detail-name">{{ $product->name }}</h1>
             
             <div class="product-detail-price-section">
-                <span class="product-detail-price">₪{{ number_format($product->price, 2) }}</span>
+                <span class="product-detail-price">₹{{ number_format($product->price, 2) }}</span>
                 <span class="product-detail-unit">/ {{ $product->unit }}</span>
             </div>
 

@@ -61,7 +61,7 @@
         <!-- Price and Unit -->
         <div class="product-pricing">
             <div class="price-info">
-                <span class="product-price">₪{{ number_format($product->price, 2) }}</span>
+                <span class="product-price">₹{{ number_format($product->price, 2) }}</span>
                 <span class="product-unit">per {{ $product->unit }}</span>
             </div>
         </div>

@@ -10,11 +10,6 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
-
     public function index()
     {
         $products = Product::with('category')->paginate(10);
@@ -94,6 +89,14 @@ class ProductController extends Controller
             unlink(public_path($product->image));
         }
         $product->delete();
+        
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Product deleted successfully.'
+            ]);
+        }
+        
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
     }
 }
