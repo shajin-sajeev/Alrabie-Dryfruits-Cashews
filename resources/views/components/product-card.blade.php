@@ -41,11 +41,11 @@
 
         <!-- Action Buttons -->
         <div class="product-actions-container">
-            <a href="{{ route('product', $product->slug) }}" class="btn-small btn-primary-small">
+            <a href="{{ route('product', $product->slug) }}" class="btn-small">
                 <span>Details</span>
                 <i class="fas fa-arrow-right"></i>
             </a>
-            <button class="btn-small btn-secondary-small" onclick="openContactSellerModal('{{ $product->name }}')">
+            <button class="btn-small" onclick="openContactSellerModal('{{ $product->name }}')">
                 <i class="fab fa-whatsapp"></i>
                 <span>Enquire</span>
             </button>

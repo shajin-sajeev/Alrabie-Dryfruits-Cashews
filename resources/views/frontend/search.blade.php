@@ -14,8 +14,8 @@
 
                 <div style="position: relative; z-index: 1;">
                     <i class="fas fa-search" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
-                    <h1 style="font-size: 2.5rem; font-weight: 800; color: white; margin-bottom: 0.5rem;">Search Results</h1>
-                    <p style="color: var(--text-muted); font-size: 1.1rem;">You searched for "<strong style="color: white;">{{ $query }}</strong>"</p>
+                    <h1 style="font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">Search Results</h1>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">You searched for "<strong style="color: var(--text-main);">{{ $query }}</strong>"</p>
                     <div style="margin-top: 1.5rem; background: rgba(16, 185, 129, 0.1); color: var(--primary-color); padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(16, 185, 129, 0.2);">
                         Found {{ $products->total() }} premium product{{ $products->total() != 1 ? 's' : '' }}
                     </div>
@@ -59,11 +59,11 @@
         <!-- No Results -->
         <div style="text-align: center; padding: 6rem 2rem; background: var(--bg-card); border-radius: 24px; border: 1px solid var(--border-color);">
             <i class="fas fa-magnifying-glass" style="font-size: 4rem; color: var(--border-color); margin-bottom: 1.5rem; display: block;"></i>
-            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 0.5rem;">No matches found</h3>
+            <h3 style="color: var(--text-main); font-size: 1.5rem; margin-bottom: 0.5rem;">No matches found</h3>
             <p style="color: var(--text-muted); max-width: 400px; margin: 0 auto;">We couldn't find any products matching your search for "{{ $query }}". Try checking for spelling or using different keywords.</p>
             <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
-                <a href="{{ route('home') }}" class="btn btn-primary-small">Back to Home</a>
-                <button class="btn btn-secondary-small" onclick="document.querySelector('.search-bar input').focus();">Try New Search</button>
+                <a href="{{ route('home') }}" class="btn btn-small">Back to Home</a>
+                <button class="btn btn-small" onclick="document.querySelector('.search-bar input').focus();">Try New Search</button>
             </div>
         </div>
         @endif

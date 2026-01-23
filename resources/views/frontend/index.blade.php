@@ -21,7 +21,7 @@
                     </button>
                     <button class="btn btn-secondary" onclick="document.getElementById('categories').scrollIntoView({behavior: 'smooth'})">
                         <span>Browse Categories</span>
-                        <i class="fas fa-grid-2"></i>
+                        <i class="fas fa-th-large"></i>
                     </button>
                 </div>
             </div>

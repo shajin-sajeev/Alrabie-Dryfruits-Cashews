@@ -147,43 +147,37 @@
                     Inquiring about: <strong id="contactProductName" style="color: var(--primary-color);"></strong>
                 </p>
 
-                <div class="contact-method-selector" style="display: flex; gap: 1rem; margin-bottom: 2rem; background: rgba(0,0,0,0.03); padding: 0.5rem; border-radius: 12px;">
-                    <button class="contact-method-btn active" onclick="selectContactMethod('email'); return false;" style="flex: 1; padding: 0.75rem; border-radius: 8px; border: none; cursor: pointer; transition: all 0.3s; background: var(--primary-color); color: white; font-weight: 700;">
-                        <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> Email
-                    </button>
-                    <button class="contact-method-btn" onclick="selectContactMethod('phone'); return false;" style="flex: 1; padding: 0.75rem; border-radius: 8px; border: none; cursor: pointer; transition: all 0.3s; background: transparent; color: var(--text-muted); font-weight: 600;">
-                        <i class="fas fa-phone" style="margin-right: 0.5rem;"></i> Phone
-                    </button>
-                </div>
+                <div class="contact-options-grid" style="display: grid; gap: 1.25rem; margin-top: 1rem;">
+                    <!-- Email Option -->
+                    <a href="javascript:void(0)" id="emailEnquiryLink" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: space-between; padding: 1.25rem 2rem;">
+                        <span style="display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-envelope" style="font-size: 1.2rem;"></i>
+                            <span>Send Email Enquiry</span>
+                        </span>
+                        <i class="fas fa-external-link-alt" style="font-size: 0.8rem; opacity: 0.6;"></i>
+                    </a>
 
-                <!-- Email Contact -->
-                <div id="emailContact" class="contact-method-content">
-                    <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem;">
-                        <p style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">Direct Email:</strong></p>
-                        <a href="mailto:info@alrabie.com" style="color: var(--primary-color); font-size: 1.25rem; font-weight: 700; text-decoration: none;">info@alrabie.com</a>
-                    </div>
-                    <a href="#" id="emailLink" class="btn btn-primary" style="width: 100%;">
-                        <span>Send Message</span>
-                        <i class="fas fa-paper-plane"></i>
+                    <!-- WhatsApp Option -->
+                    <a href="javascript:void(0)" id="whatsappEnquiryLink" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: space-between; padding: 1.25rem 2rem; background: #25D366; color: white; border: none;">
+                        <span style="display: flex; align-items: center; gap: 1rem;">
+                            <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i>
+                            <span>Chat on WhatsApp</span>
+                        </span>
+                        <i class="fas fa-external-link-alt" style="font-size: 0.8rem; opacity: 0.6;"></i>
+                    </a>
+
+                    <!-- Direct Call Option -->
+                    <a href="javascript:void(0)" id="callEnquiryLink" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: space-between; padding: 1.25rem 2rem;">
+                        <span style="display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-phone-alt" style="font-size: 1.2rem;"></i>
+                            <span>Make a Direct Call</span>
+                        </span>
+                        <i class="fas fa-external-link-alt" style="font-size: 0.8rem; opacity: 0.6;"></i>
                     </a>
                 </div>
 
-                <!-- Phone Contact -->
-                <div id="phoneContact" class="contact-method-content" style="display: none;">
-                    <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem;">
-                        <p style="margin-bottom: 0.5rem;"><strong style="color: var(--text-main);">WhatsApp & Call:</strong></p>
-                        <a href="tel:+918075615183" style="color: var(--primary-color); font-size: 1.25rem; font-weight: 700; text-decoration: none;">+91 8075615183</a>
-                    </div>
-                    <div style="display: flex; gap: 1rem;">
-                        <a href="tel:+918075615183" class="btn btn-primary" style="flex: 1;">
-                            <i class="fas fa-phone"></i>
-                            <span>Call Now</span>
-                        </a>
-                        <a href="https://wa.me/918075615183" target="_blank" class="btn btn-secondary" style="flex: 1;">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>WhatsApp</span>
-                        </a>
-                    </div>
+                <div style="margin-top: 2rem; padding: 1.25rem; background: rgba(16, 185, 129, 0.05); border-radius: 12px; border: 1px solid var(--border-color); text-align: center;">
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Our team typically responds within <strong style="color: var(--primary-color);">12 business hours</strong>.</p>
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@
 
         <div style="position: relative; z-index: 1;">
             <span style="color: var(--primary-color); text-transform: uppercase; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1rem; display: block;">Our Collection</span>
-            <h1 style="font-size: 3.5rem; font-weight: 900; color: white; margin-bottom: 1rem; letter-spacing: -0.02em;">{{ $category->name }}</h1>
+            <h1 style="font-size: 3.5rem; font-weight: 900; color: var(--text-main); margin-bottom: 1rem; letter-spacing: -0.02em;">{{ $category->name }}</h1>
             <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; max-width: 600px; margin-bottom: 2rem;">{{ $category->description ?? 'Discover our hand-picked selection of the finest ' . strtolower($category->name) . ' from around the globe.' }}</p>
             <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-main); font-weight: 600;">
                 <i class="fas fa-boxes-stacked" style="color: var(--primary-color);"></i>
@@ -42,9 +42,9 @@
         @empty
         <div style="grid-column: 1/-1; text-align: center; padding: 6rem 2rem; background: var(--bg-card); border-radius: 24px; border: 1px solid var(--border-color);">
             <i class="fas fa-search" style="font-size: 4rem; color: var(--border-color); margin-bottom: 1.5rem; display: block;"></i>
-            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 0.5rem;">No products found</h3>
+            <h3 style="color: var(--text-main); font-size: 1.5rem; margin-bottom: 0.5rem;">No products found</h3>
             <p style="color: var(--text-muted);">We couldn't find any products in this category at the moment.</p>
-            <a href="{{ route('home') }}" class="btn btn-primary-small" style="margin-top: 2rem; display: inline-flex;">Go Home</a>
+            <a href="{{ route('home') }}" class="btn btn-small" style="margin-top: 2rem; display: inline-flex;">Go Home</a>
         </div>
         @endforelse
     </div>

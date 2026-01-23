@@ -226,28 +226,38 @@ function initializeCarousel() {
 
 function openContactSellerModal(productName) {
     const modal = document.getElementById('contactSellerModal');
-    if (modal) {
-        document.getElementById('contactProductName').textContent = productName;
-        document.getElementById('emailProductName').textContent = productName;
-        
-        // Update email link with product name
-        const emailLink = document.getElementById('emailLink');
-        if (emailLink) {
-            const subject = encodeURIComponent(`Inquiry about ${productName}`);
-            emailLink.href = `mailto:info@alrabie.com?subject=${subject}`;
-        }
-        
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-        // Reset to email method
-        selectContactMethod('email');
-    }
-}
+    if (!modal) return;
 
-function sendEmail() {
-    const productName = document.getElementById('contactProductName').textContent;
+    const contactNameEl = document.getElementById('contactProductName');
+    if (contactNameEl) contactNameEl.textContent = productName;
+    
+    // Config
+    const businessEmail = 'info@alrabie.com';
+    const businessPhone = '+918075615183';
+    const businessWhatsApp = '918075615183';
     const subject = encodeURIComponent(`Inquiry about ${productName}`);
-    window.location.href = `mailto:info@alrabie.com?subject=${subject}`;
+    const body = encodeURIComponent(`Hello Al Rabie Team,\n\nI am interested in ${productName}. Please provide more details.\n\nThank you.`);
+
+    // Email Link
+    const emailLink = document.getElementById('emailEnquiryLink');
+    if (emailLink) {
+        emailLink.href = `mailto:${businessEmail}?subject=${subject}&body=${body}`;
+    }
+    
+    // WhatsApp Link
+    const whatsappLink = document.getElementById('whatsappEnquiryLink');
+    if (whatsappLink) {
+        whatsappLink.href = `https://wa.me/${businessWhatsApp}?text=${body}`;
+    }
+
+    // Call Link
+    const callLink = document.getElementById('callEnquiryLink');
+    if (callLink) {
+        callLink.href = `tel:${businessPhone}`;
+    }
+    
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
 }
 
 function closeContactSellerModal() {
@@ -256,20 +266,6 @@ function closeContactSellerModal() {
         modal.classList.remove('show');
         document.body.style.overflow = 'auto';
     }
-}
-
-function selectContactMethod(method) {
-    // Update button states
-    document.querySelectorAll('.contact-method-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.textContent.includes(method === 'email' ? '📧' : '📱')) {
-            btn.classList.add('active');
-        }
-    });
-    
-    // Show/hide content
-    document.getElementById('emailContact').style.display = method === 'email' ? 'block' : 'none';
-    document.getElementById('phoneContact').style.display = method === 'phone' ? 'block' : 'none';
 }
 
 function showNotification(message, type = 'info') {
@@ -386,10 +382,12 @@ if ('IntersectionObserver' in window) {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
-        if (href !== '#') {
-            e.preventDefault();
+        
+        // Only prevent default if it's a valid internal anchor (starts with # and has target)
+        if (href && href.startsWith('#') && href !== '#') {
             const target = document.querySelector(href);
             if (target) {
+                e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth' });
             }
         }

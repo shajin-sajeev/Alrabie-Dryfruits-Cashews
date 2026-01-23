@@ -45,10 +45,10 @@
                 <span style="color: var(--primary-color); text-transform: uppercase; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.5rem; display: block;">
                     {{ $product->category->name ?? 'Premium Collection' }}
                 </span>
-                <h1 style="font-size: 3rem; font-weight: 900; color: white; margin-bottom: 1.5rem; letter-spacing: -0.02em; line-height: 1.1;">{{ $product->name }}</h1>
+                <h1 style="font-size: 3rem; font-weight: 900; color: var(--text-main); margin-bottom: 1.5rem; letter-spacing: -0.02em; line-height: 1.1;">{{ $product->name }}</h1>
 
                 <div style="display: flex; align-items: baseline; gap: 0.75rem;">
-                    <span style="font-size: 2.5rem; font-weight: 900; color: white;">₹{{ number_format($product->price, 0) }}</span>
+                    <span style="font-size: 2.5rem; font-weight: 900; color: var(--text-main);">₹{{ number_format($product->price, 0) }}</span>
                     <span style="font-size: 1.15rem; color: var(--text-muted); font-weight: 500;">/ {{ $product->unit }}</span>
                 </div>
             </div>
@@ -56,16 +56,16 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; padding: 2rem; background: rgba(255, 255, 255, 0.03); border-radius: 20px; border: 1px solid var(--border-color);">
                 <div>
                     <label style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em; display: block; margin-bottom: 0.5rem;">Availability</label>
-                    <div style="color: white; font-weight: 700; font-size: 1.1rem;">{{ $product->quantity }} {{ $product->unit }}</div>
+                    <div style="color: var(--text-main); font-weight: 700; font-size: 1.1rem;">{{ $product->quantity }} {{ $product->unit }}</div>
                 </div>
                 <div>
                     <label style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em; display: block; margin-bottom: 0.5rem;">Origin</label>
-                    <div style="color: white; font-weight: 700; font-size: 1.1rem;">Authentic Pick</div>
+                    <div style="color: var(--text-main); font-weight: 700; font-size: 1.1rem;">Authentic Pick</div>
                 </div>
             </div>
 
             <div>
-                <h3 style="color: white; font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem;">Product Details</h3>
+                <h3 style="color: var(--text-main); font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem;">Product Details</h3>
                 <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; max-width: 500px;">{{ $product->description ?: 'No additional details available for this hand-selected item.' }}</p>
             </div>
 
