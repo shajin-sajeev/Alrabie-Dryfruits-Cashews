@@ -189,7 +189,7 @@
                     <div class="info-details">
                         <h3>Direct Call</h3>
                         <p>Speak with our customer relations team directly.</p>
-                        <a href="tel:+966501234567" class="info-link">+966 50 123 4567</a>
+                        <a href="tel:+91 8075615183" class="info-link">+91 8075615183</a>
                     </div>
                 </div>
 
@@ -198,7 +198,7 @@
                     <div class="info-details">
                         <h3>Instant Concierge</h3>
                         <p>Message us on WhatsApp for 24/7 priority support.</p>
-                        <a href="https://wa.me/966501234567" target="_blank" class="info-link">Start Priority Chat</a>
+                        <a href="https://wa.me/8075615183" target="_blank" class="info-link">Start Priority Chat</a>
                     </div>
                 </div>
 
@@ -206,8 +206,9 @@
                     <div class="info-icon"><i class="fas fa-map-location-dot"></i></div>
                     <div class="info-details">
                         <h3>Flagship Store</h3>
-                        <p>Visit our flagship store in the heart of Riyadh.</p>
-                        <span class="info-text" style="color: var(--text-main); font-weight: 600;">King Fahd Road, Riyadh, KSA</span>
+                        <p>Visit our flagship store in the heart of Attingal.</p>
+                        <span class="info-text" style="color: var(--text-main); font-weight: 600;">Mamam, Attingal, Kerala</span>
+                        <a href="https://maps.app.goo.gl/xqoHAAuAYgeTdhXZ9" target="_blank" class="info-link">Get Directions</a>
                     </div>
                 </div>
             </div>

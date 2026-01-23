@@ -113,27 +113,8 @@ function initializeAnimations() {
 // ===================================
 
 function initializeSearch() {
-    const searchForm = document.querySelector('.search-bar');
-    if (searchForm) {
-        const input = searchForm.querySelector('input');
-        const button = searchForm.querySelector('button');
-
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (input.value.trim()) {
-                window.location.href = `/search?q=${encodeURIComponent(input.value)}`;
-            }
-        });
-
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                if (input.value.trim()) {
-                    window.location.href = `/search?q=${encodeURIComponent(input.value)}`;
-                }
-            }
-        });
-    }
+    // Search is handled by natural HTML form submission in app.blade.php
+    // This function is kept empty for compatibility or future non-reload search features
 }
 
 // ===================================

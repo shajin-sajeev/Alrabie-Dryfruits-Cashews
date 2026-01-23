@@ -71,5 +71,3 @@
 </section>
 
 @endsection
-
-@endsection

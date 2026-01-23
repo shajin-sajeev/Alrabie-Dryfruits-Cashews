@@ -104,9 +104,7 @@
             <div class="footer-section">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="{{ route('home') }}">Order Tracking</a></li>
                     <li><a href="{{ route('home') }}#contact">Customer Care</a></li>
-                    <li><a href="#">Shipping Policy</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                 </ul>
             </div>
@@ -120,11 +118,11 @@
                     </li>
                     <li style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1rem;">
                         <i class="fas fa-phone" style="color: var(--primary-color);"></i>
-                        <span>+966 50 123 4567</span>
+                        <span>+91 8075615183</span>
                     </li>
                     <li style="display: flex; gap: 0.75rem; align-items: center;">
                         <i class="fas fa-location-dot" style="color: var(--primary-color);"></i>
-                        <span>Riyadh, Saudi Arabia</span>
+                        <span>Attingal, Kerala, India</span>
                     </li>
                 </ul>
             </div>

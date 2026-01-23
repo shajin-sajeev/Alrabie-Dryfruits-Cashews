@@ -12,23 +12,50 @@
 </div>
 
 <!-- Category Header -->
-<header class="category-header-banner" style="padding: 4rem 2rem; max-width: 1400px; margin: 0 auto;">
-    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 3rem; display: flex; gap: 4rem; align-items: center; position: relative; overflow: hidden;">
-        <div style="position: absolute; top: -50%; left: -10%; width: 40%; height: 200%; background: var(--primary-glow); filter: blur(100px); opacity: 0.1; z-index: 0;"></div>
+<header class="category-header-banner" style="padding: 2rem; max-width: 1400px; margin: 0 auto;">
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 4rem; display: flex; gap: 5rem; align-items: center; position: relative; overflow: hidden; box-shadow: var(--shadow-sm);">
+        <!-- Backdrop Glow -->
+        <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: var(--primary-glow); filter: blur(80px); opacity: 0.15; z-index: 0; pointer-events: none;"></div>
 
         @if ($category->image)
         <div style="position: relative; z-index: 1; flex-shrink: 0;">
-            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" style="width: 280px; height: 280px; border-radius: 20px; object-fit: cover; box-shadow: var(--shadow-lg);">
+            <div style="position: relative;">
+                <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" style="width: 320px; height: 320px; border-radius: 24px; object-fit: cover; box-shadow: var(--shadow-lg); position: relative; z-index: 2;">
+                <!-- Decorative element behind image -->
+                <div style="position: absolute; top: 20px; right: -20px; bottom: -20px; left: 20px; border: 2px solid var(--primary-color); border-radius: 24px; opacity: 0.15; z-index: 1;"></div>
+            </div>
         </div>
         @endif
 
         <div style="position: relative; z-index: 1;">
-            <span style="color: var(--primary-color); text-transform: uppercase; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1rem; display: block;">Our Collection</span>
-            <h1 style="font-size: 3.5rem; font-weight: 900; color: var(--text-main); margin-bottom: 1rem; letter-spacing: -0.02em;">{{ $category->name }}</h1>
-            <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; max-width: 600px; margin-bottom: 2rem;">{{ $category->description ?? 'Discover our hand-picked selection of the finest ' . strtolower($category->name) . ' from around the globe.' }}</p>
-            <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-main); font-weight: 600;">
-                <i class="fas fa-boxes-stacked" style="color: var(--primary-color);"></i>
-                <span>{{ $products->total() }} Premium Items Available</span>
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <span style="background: var(--primary-glow); color: var(--primary-color); padding: 0.5rem 1.25rem; border-radius: 50px; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;">Premium Selection</span>
+                <div style="height: 1px; width: 40px; background: var(--border-color);"></div>
+            </div>
+
+            <h1 style="font-size: 4rem; font-weight: 900; color: var(--text-main); margin-bottom: 1.5rem; letter-spacing: -0.03em; line-height: 1;">{{ $category->name }}</h1>
+            <p style="color: var(--text-muted); font-size: 1.25rem; line-height: 1.7; max-width: 650px; margin-bottom: 2.5rem; font-weight: 400;">{{ $category->description ?? 'Discover our hand-picked selection of the finest ' . strtolower($category->name) . ' from around the globe, curated for quality and taste.' }}</p>
+
+            <div style="display: flex; gap: 3rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="width: 44px; height: 44px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-boxes-stacked" style="color: var(--primary-color); font-size: 1.1rem;"></i>
+                    </div>
+                    <div>
+                        <span style="display: block; font-size: 1.1rem; font-weight: 800; color: var(--text-main);">{{ $products->total() }} items</span>
+                        <span style="display: block; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;">In Collection</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="width: 44px; height: 44px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-medal" style="color: #f59e0b; font-size: 1.1rem;"></i>
+                    </div>
+                    <div>
+                        <span style="display: block; font-size: 1.1rem; font-weight: 800; color: var(--text-main);">Verified</span>
+                        <span style="display: block; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;">Quality Grade</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
