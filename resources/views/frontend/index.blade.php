@@ -4,22 +4,88 @@
 
 @section('content')
 
-<!-- Hero Section -->
-<section class="hero">
-    <div class="hero-content">
-        <h1>Premium Nature, <br>Delivered Daily.</h1>
-        <p>Discover our artisanal collection of hand-picked dry fruits, organic nuts, and imported chocolates. Perfection in every bite.</p>
-        <div class="cta-buttons">
-            <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
-                <span>Shop Collection</span>
-                <i class="fas fa-shopping-bag"></i>
-            </button>
-            <button class="btn btn-secondary" onclick="document.getElementById('categories').scrollIntoView({behavior: 'smooth'})">
-                <span>Browse Categories</span>
-                <i class="fas fa-grid-2"></i>
-            </button>
+<!-- Modern Home Carousel -->
+<section class="hero-carousel">
+    <div class="carousel-container">
+        <!-- Slide 1 -->
+        <div class="carousel-slide active">
+            <img src="{{ asset('images/carousel/slide1.jpg') }}" alt="Premium Dry Fruits" class="carousel-image">
+            <div class="carousel-overlay"></div>
+            <div class="hero-content">
+                <h1>Premium Nature, <br>Delivered Daily.</h1>
+                <p>Discover our artisanal collection of hand-picked dry fruits, organic nuts, and imported chocolates. Perfection in every bite.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                        <span>Shop Collection</span>
+                        <i class="fas fa-shopping-bag"></i>
+                    </button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('categories').scrollIntoView({behavior: 'smooth'})">
+                        <span>Browse Categories</span>
+                        <i class="fas fa-grid-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+            <img src="{{ asset('images/carousel/slide2.jpg') }}" alt="Dried Fruits Harvest" class="carousel-image">
+            <div class="carousel-overlay"></div>
+            <div class="hero-content">
+                <h1>The Purest Harvest, <br>Direct to You.</h1>
+                <p>Sun-dried perfection and organic goodness, curated for your sophisticated palate.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                        <span>View Featured</span>
+                        <i class="fas fa-star"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+            <img src="{{ asset('images/carousel/slide3.jpg') }}" alt="Tradition and Quality" class="carousel-image">
+            <div class="carousel-overlay"></div>
+            <div class="hero-content">
+                <h1>A Legacy of <br>Curated Excellence.</h1>
+                <p>Rooted in tradition, Al Rabie brings you the finest selections from global spice markets.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="document.getElementById('categories').scrollIntoView({behavior: 'smooth'})">
+                        <span>Discover More</span>
+                        <i class="fas fa-compass"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="carousel-slide">
+            <img src="{{ asset('images/carousel/slide4.jpg') }}" alt="Healthy Gourmet Snacking" class="carousel-image">
+            <div class="carousel-overlay"></div>
+            <div class="hero-content">
+                <h1>Gourmet Health <br>In Every Handful.</h1>
+                <p>The perfect blend of nutrition and luxury. Healthy snacking redefined for the premium lifestyle.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                        <span>Get In Touch</span>
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Navigation -->
+    <button class="carousel-nav-btn prev" aria-label="Previous slide">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="carousel-nav-btn next" aria-label="Next slide">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <!-- Indicators -->
+    <div class="carousel-indicators"></div>
 </section>
 
 <!-- Categories Section -->

@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeModals();
     initializeAnimations();
     initializeSearch();
+    initializeCarousel();
 });
 
 // ===================================
@@ -94,14 +95,7 @@ function initializeAnimations() {
         observer.observe(el);
     });
 
-    // Parallax effect
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            hero.style.backgroundPosition = `0 ${scrollY * 0.5}px`;
-        }
-    });
+
 
     // Button hover animation
     document.querySelectorAll('.btn').forEach(btn => {
@@ -140,6 +134,86 @@ function initializeSearch() {
             }
         });
     }
+}
+
+// ===================================
+// HERO CAROUSEL
+// ===================================
+
+function initializeCarousel() {
+    const carousel = document.querySelector('.hero-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    const indicatorContainer = carousel.querySelector('.carousel-indicators');
+    
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Create indicators
+    slides.forEach((_, index) => {
+        const indicator = document.createElement('button');
+        indicator.classList.add('indicator');
+        if (index === 0) indicator.classList.add('active');
+        indicator.addEventListener('click', () => goToSlide(index));
+        indicatorContainer.appendChild(indicator);
+    });
+
+    const indicators = carousel.querySelectorAll('.indicator');
+
+    function updateSlides() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            indicators[index].classList.remove('active');
+            if (index === currentSlide) {
+                slide.classList.add('active');
+                indicators[index].classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlides();
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlides();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlides();
+        resetInterval();
+    }
+
+    function resetInterval() {
+        clearInterval(slideInterval);
+        startInterval();
+    }
+
+    function startInterval() {
+        slideInterval = setInterval(nextSlide, 8000);
+    }
+
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetInterval();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetInterval();
+    });
+
+    // Pause on hover
+    carousel.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    carousel.addEventListener('mouseleave', () => startInterval());
+
+    startInterval();
 }
 
 // ===================================

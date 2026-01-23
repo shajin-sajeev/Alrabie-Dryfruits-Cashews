@@ -147,7 +147,7 @@
                     Inquiring about: <strong id="contactProductName" style="color: var(--primary-color);"></strong>
                 </p>
 
-                <div class="contact-method-selector" style="display: flex; gap: 1rem; margin-bottom: 2rem; background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 12px;">
+                <div class="contact-method-selector" style="display: flex; gap: 1rem; margin-bottom: 2rem; background: rgba(0,0,0,0.03); padding: 0.5rem; border-radius: 12px;">
                     <button class="contact-method-btn active" onclick="selectContactMethod('email'); return false;" style="flex: 1; padding: 0.75rem; border-radius: 8px; border: none; cursor: pointer; transition: all 0.3s; background: var(--primary-color); color: white; font-weight: 700;">
                         <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> Email
                     </button>
