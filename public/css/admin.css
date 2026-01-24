@@ -715,6 +715,8 @@ table img {
 
 .auth-input-wrapper {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .auth-input-wrapper i {
@@ -796,6 +798,56 @@ table img {
     align-items: center;
     gap: 0.75rem;
     animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+    color: var(--text-muted);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.auth-divider span {
+    margin: 0 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.875rem;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-main);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--duration);
+}
+
+.btn-google:hover {
+    background: var(--bg-main);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+}
+
+.btn-google img {
+    width: 18px;
+    height: 18px;
 }
 
 @keyframes shake {

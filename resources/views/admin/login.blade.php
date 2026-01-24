@@ -68,6 +68,17 @@
                 </button>
             </form>
 
+            <div class="auth-divider">
+                <span>OR</span>
+            </div>
+
+            <div class="oauth-links">
+                <a href="{{ route('admin.auth.google') }}" class="btn-google">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
+                    <span>Sign in with Google</span>
+                </a>
+            </div>
+
             <footer class="auth-footer">
                 Don't have an account? <a href="{{ route('admin.register') }}">Create Account</a>
             </footer>
