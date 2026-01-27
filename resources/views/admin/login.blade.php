@@ -45,7 +45,7 @@
                     <label for="email">Email Address</label>
                     <div class="auth-input-wrapper">
                         <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus placeholder="name@example.com">
-                        <i class="fas fa-envelope"></i>
+                        <!-- <i class="fas fa-envelope"></i> -->
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
                     <label for="password">Password</label>
                     <div class="auth-input-wrapper">
                         <input type="password" id="password" name="password" required placeholder="••••••••">
-                        <i class="fas fa-lock"></i>
+                        <!-- <i class="fas fa-lock"></i> -->
                     </div>
                 </div>
 
