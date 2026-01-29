@@ -22,7 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         
         $middleware->alias([
-            'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+            'auth' => \App\Http\Middleware\AdminAuthenticate::class,
+            'guest' => \Illuminate\Auth\Middleware\RedirectIfAuthenticated::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
@@ -31,12 +32,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json(['message' => 'Unauthorized'], 401);
             }
             
-            // For admin routes
+            // For admin routes - show authentication error page
             if ($request->is('admin/*')) {
-                return redirect()->route('admin.login');
+                return response()->view('admin.auth-error', [], 401);
             }
             
-            // For regular user routes (if you have any)
+            // For regular user routes
             return redirect()->route('home');
         });
     })

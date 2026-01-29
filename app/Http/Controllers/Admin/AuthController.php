@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function loginForm()
     {
-        if (Auth::check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect()->route('admin.dashboard');
         }
         return view('admin.login');
@@ -28,7 +28,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         $remember = $request->filled('remember');
 
-        if (Auth::attempt($credentials, $remember)) {
+        if (Auth::guard('admin')->attempt($credentials, $remember)) {
             $request->session()->regenerate();
             return redirect()->intended(route('admin.dashboard'))->with('success', 'Welcome back!');
         }
@@ -40,7 +40,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('admin.login')->with('success', 'Logged out successfully.');
@@ -55,18 +55,18 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:admins',
             'password' => 'required|min:8|confirmed',
         ]);
 
-        $user = User::create([
+        $admin = Admin::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        // Auto-login the newly registered user
-        Auth::login($user);
+        // Auto-login the newly registered admin
+        Auth::guard('admin')->login($admin);
 
         $request->session()->regenerate();
 

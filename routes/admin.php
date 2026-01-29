@@ -8,8 +8,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 
 Route::prefix('admin')->group(function () {
-    // Auth Routes
-    Route::middleware('guest')->group(function () {
+    // Auth Routes - Only for unauthenticated admins
+    Route::middleware('guest:admin')->group(function () {
         Route::get('/login', [AuthController::class, 'loginForm'])->name('admin.login');
         Route::post('/login', [AuthController::class, 'login'])->name('admin.login.store');
         Route::get('/register', [AuthController::class, 'register'])->name('admin.register');
@@ -20,14 +20,20 @@ Route::prefix('admin')->group(function () {
         Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('admin.auth.google.callback');
     });
 
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('admin.logout');
+    // Logout Route
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->middleware('auth:admin')
+        ->name('admin.logout');
 
-    // Dashboard Routes
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('admin.dashboard');
+    // Protected Admin Routes - Requires authentication
+    Route::middleware(['auth:admin'])->group(function () {
+        // Dashboard Routes
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    // Category Routes
-    Route::middleware('auth')->resource('categories', CategoryController::class, ['as' => 'admin']);
+        // Category Routes
+        Route::resource('categories', CategoryController::class, ['as' => 'admin']);
 
-    // Product Routes
-    Route::middleware('auth')->resource('products', ProductController::class, ['as' => 'admin']);
+        // Product Routes
+        Route::resource('products', ProductController::class, ['as' => 'admin']);
+    });
 });
