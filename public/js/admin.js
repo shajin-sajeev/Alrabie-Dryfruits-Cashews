@@ -24,26 +24,7 @@ function initializeDeleteButtons() {
             const url = this.getAttribute('data-url');
             const itemType = this.getAttribute('data-item-type') || 'item';
             
-            Swal.fire({
-                title: 'Delete ' + itemType.charAt(0).toUpperCase() + itemType.slice(1) + '?',
-                html: `<p style="color: #666; font-size: 0.95rem;">You are about to delete <strong>${itemName}</strong></p>
-                       <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">This action cannot be undone.</p>`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ef4444',
-                cancelButtonColor: '#6b7280',
-                confirmButtonText: '<i class="fas fa-trash"></i> Delete',
-                cancelButtonText: '<i class="fas fa-times"></i> Cancel',
-                htmlContent: true,
-                allowOutsideClick: false,
-                allowEscapeKey: true,
-                didOpen: (modal) => {
-                    const confirmBtn = modal.querySelector('[data-swal-role="confirm"]');
-                    if (confirmBtn) {
-                        confirmBtn.innerHTML = '<i class="fas fa-trash" style="margin-right: 0.5rem;"></i> Delete';
-                    }
-                }
-            }).then((result) => {
+            Swal.fire(swalTheme.deleteConfirm(itemName, itemType)).then((result) => {
                 if (result.isConfirmed) {
                     performDelete(url, itemName, itemType);
                 }
@@ -54,15 +35,7 @@ function initializeDeleteButtons() {
 
 function performDelete(url, itemName, itemType) {
     // Show loading state
-    Swal.fire({
-        title: 'Deleting...',
-        icon: 'info',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        didOpen: () => {
-            Swal.showLoading();
-        }
-    });
+    Swal.fire(swalTheme.loading('Deleting...'));
 
     fetch(url, {
         method: 'DELETE',
@@ -79,25 +52,19 @@ function performDelete(url, itemName, itemType) {
         return response.json();
     })
     .then(data => {
-        Swal.fire({
-            title: 'Deleted!',
-            html: `<p style="color: #333;">${itemType.charAt(0).toUpperCase() + itemType.slice(1)} <strong>${itemName}</strong> has been deleted.</p>`,
-            icon: 'success',
-            confirmButtonColor: '#10b981',
-            confirmButtonText: 'OK'
-        }).then(() => {
+        Swal.fire(swalTheme.success(
+            'Deleted!',
+            `${itemType.charAt(0).toUpperCase() + itemType.slice(1)} <strong>${itemName}</strong> has been deleted successfully.`
+        )).then(() => {
             location.reload();
         });
     })
     .catch(error => {
         console.error('Error:', error);
-        Swal.fire({
-            title: 'Error!',
-            html: '<p style="color: #333;">Failed to delete the ' + itemType + '. Please try again.</p>',
-            icon: 'error',
-            confirmButtonColor: '#10b981',
-            confirmButtonText: 'OK'
-        });
+        Swal.fire(swalTheme.error(
+            'Error!',
+            `Failed to delete the ${itemType}. Please try again.`
+        ));
     });
 }
 

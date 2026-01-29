@@ -10,10 +10,19 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->paginate(10);
-        return view('admin.products.index', compact('products'));
+        $query = Product::with('category');
+        $categories = Category::all();
+
+        if ($request->has('categories') && !empty($request->categories)) {
+            $categoryIds = is_array($request->categories) ? $request->categories : [$request->categories];
+            $query->whereIn('category_id', $categoryIds);
+        }
+
+        $products = $query->paginate(10)->appends($request->query());
+        
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     public function create()

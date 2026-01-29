@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SweetAlert2 Theme Test</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .test-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            background: #10b981;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        .info-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+        }
+        .info-box h3 {
+            margin-top: 0;
+            color: #10b981;
+        }
+        .status {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        .status.success {
+            background: #ecfdf5;
+            color: #065f46;
+        }
+        .status.error {
+            background: #fef2f2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 SweetAlert2 Theme Test</h1>
+        <p>Test each alert type to verify the theme is working correctly.</p>
+        
+        <div class="test-buttons">
+            <button onclick="testSuccess()">Success Alert</button>
+            <button onclick="testError()">Error Alert</button>
+            <button onclick="testWarning()">Warning Alert</button>
+            <button onclick="testInfo()">Info Alert</button>
+            <button onclick="testConfirm()">Confirm Dialog</button>
+            <button onclick="testDelete()">Delete Confirmation</button>
+            <button onclick="testBulkDelete()">Bulk Delete (5 items)</button>
+            <button onclick="testLoading()">Loading State</button>
+        </div>
+
+        <div class="info-box">
+            <h3>📋 What to Check:</h3>
+            <ul>
+                <li>✓ Logo appears at top of modal</li>
+                <li>✓ Background has gradient (white to light gray)</li>
+                <li>✓ Border has emerald green color (#d1fae5)</li>
+                <li>✓ Title is dark gray (#1e293b)</li>
+                <li>✓ Confirm button has emerald gradient (#10b981 → #059669)</li>
+                <li>✓ Cancel button is light gray</li>
+                <li>✓ Icon colors match theme (success=green, error=red, warning=amber, info=blue)</li>
+                <li>✓ Smooth animations on modal appearance</li>
+                <li>✓ Hover effects on buttons</li>
+            </ul>
+        </div>
+
+        <div class="info-box" style="border-left-color: #0ea5e9; background: #f0f9ff;">
+            <h3>🔧 Debug Info:</h3>
+            <div id="debug-info">
+                <div class="status" id="theme-status">Checking...</div>
+                <div class="status" id="swal-status">Checking...</div>
+                <div class="status" id="logo-status">Checking...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <script src="/js/sweetalert-theme.js?v=test"></script>
+
+    <script>
+        // Debug information
+        setTimeout(() => {
+            const themeStatus = document.getElementById('theme-status');
+            const swalStatus = document.getElementById('swal-status');
+            const logoStatus = document.getElementById('logo-status');
+
+            // Check if swalTheme exists
+            if (typeof window.swalTheme !== 'undefined') {
+                themeStatus.textContent = '✓ swalTheme object loaded';
+                themeStatus.className = 'status success';
+            } else {
+                themeStatus.textContent = '✗ swalTheme object NOT found';
+                themeStatus.className = 'status error';
+            }
+
+            // Check if Swal exists
+            if (typeof Swal !== 'undefined') {
+                swalStatus.textContent = '✓ SweetAlert2 library loaded';
+                swalStatus.className = 'status success';
+            } else {
+                swalStatus.textContent = '✗ SweetAlert2 NOT loaded';
+                swalStatus.className = 'status error';
+            }
+
+            // Check if logo exists
+            fetch('/images/logo.jpeg')
+                .then(r => {
+                    if (r.ok) {
+                        logoStatus.textContent = '✓ Logo image found';
+                        logoStatus.className = 'status success';
+                    } else {
+                        logoStatus.textContent = '✗ Logo image NOT found (404)';
+                        logoStatus.className = 'status error';
+                    }
+                })
+                .catch(() => {
+                    logoStatus.textContent = '✗ Logo image fetch failed';
+                    logoStatus.className = 'status error';
+                });
+        }, 500);
+
+        function testSuccess() {
+            if (window.swalTheme) {
+                Swal.fire(window.swalTheme.success('Success!', 'This is a success message with the theme applied.'));
+            }
+        }
+
+        function testError() {
+            if (window.swalTheme) {
+                Swal.fire(window.swalTheme.error('Error!', 'Something went wrong. Please try again.'));
+            }
+        }
+
+        function testWarning() {
+            if (window.swalTheme) {
+                Swal.fire(window.swalTheme.warning('Warning!', 'Please be careful with this action.'));
+            }
+        }
+
+        function testInfo() {
+            if (window.swalTheme) {
+                Swal.fire(window.swalTheme.info('Information', 'This is an informational message.'));
+            }
+        }
+
+        function testConfirm() {
+            if (window.swalTheme) {
+                Swal.fire(window.swalTheme.confirm('Confirm Action', 'Are you sure you want to proceed?', 'Yes', 'No')).then(result => {
+                    if (result.isConfirmed) {
+                        alert('You clicked Yes!');
+                    }
+                });
+            }
+        }
+
+        function testDelete() {
+            if (window.swalTheme) {
+                Swal.fire(window.swalTheme.deleteConfirm('Product Name', 'product')).then(result => {
+                    if (result.isConfirmed) {
+                        Swal.fire(window.swalTheme.success('Deleted!', 'Product has been deleted successfully.'));
+                    }
+                });
+            }
+        }
+
+        function testBulkDelete() {
+            if (window.swalTheme) {
+                Swal.fire(window.swalTheme.bulkDeleteConfirm(5)).then(result => {
+                    if (result.isConfirmed) {
+                        Swal.fire(window.swalTheme.success('Deleted!', '5 products have been deleted successfully.'));
+                    }
+                });
+            }
+        }
+
+        function testLoading() {
+            if (window.swalTheme) {
+                Swal.fire(window.swalTheme.loading('Processing...'));
+                setTimeout(() => {
+                    Swal.fire(window.swalTheme.success('Complete!', 'Processing finished successfully.'));
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>

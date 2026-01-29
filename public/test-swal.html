@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="test">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    <title>SweetAlert Logo Test</title>
+</head>
+<body>
+    <h1>SweetAlert Logo Test</h1>
+    <button onclick="testSuccess()">Test Success Alert</button>
+    <button onclick="testError()">Test Error Alert</button>
+    <button onclick="testWarning()">Test Warning Alert</button>
+    <button onclick="testDelete()">Test Delete Alert</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <script src="/js/sweetalert-theme.js"></script>
+    
+    <script>
+        function testSuccess() {
+            Swal.fire(swalTheme.success('Success!', 'This is a success message.'));
+        }
+
+        function testError() {
+            Swal.fire(swalTheme.error('Error!', 'This is an error message.'));
+        }
+
+        function testWarning() {
+            Swal.fire(swalTheme.warning('Warning!', 'This is a warning message.'));
+        }
+
+        function testDelete() {
+            Swal.fire(swalTheme.deleteConfirm('Test Product', 'product'));
+        }
+    </script>
+</body>
+</html>

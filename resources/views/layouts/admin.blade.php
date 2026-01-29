@@ -135,7 +135,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/sweetalert-theme.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/admin.js') }}?v={{ time() }}"></script>
     @yield('scripts')
 </body>
 
