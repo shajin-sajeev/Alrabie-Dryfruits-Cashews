@@ -24,7 +24,8 @@
         "DB_USERNAME": "avnadmin",
         "DB_PASSWORD": "AVNS_jIiB9S_WSZbP7Rr8NwK",
         "APP_KEY": "base64:rqSvOI3E3a0m2m6q2rhGomV7Cjw40cInyw/0AUcS+tE=",
-        "APP_URL": "https://alrabie-dryfruits-cashews.vercel.app"
+        "APP_URL": "https://alrabie-dryfruits-cashews.vercel.app",
+        "DB_SSL_VERIFY": "false"
     },
     "routes": [
         {
