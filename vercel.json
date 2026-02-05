@@ -22,7 +22,7 @@
         "DB_PORT": "26596",
         "DB_DATABASE": "defaultdb",
         "DB_USERNAME": "avnadmin",
-        "DB_PASSWORD": "AVNS_jIiB9S_WSZbP7Rr8NwK",
+        "DB_PASSWORD": "AVNS_QRtU05ismu7ATHSyaTg",
         "APP_KEY": "base64:rqSvOI3E3a0m2m6q2rhGomV7Cjw40cInyw/0AUcS+tE=",
         "APP_URL": "https://alrabie-dryfruits-cashews.vercel.app",
         "DB_SSL_VERIFY": "false"
