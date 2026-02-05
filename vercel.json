@@ -17,14 +17,6 @@
         "APP_ROUTES_CACHE": "/tmp/cache/routes.php",
         "APP_SERVICES_CACHE": "/tmp/cache/services.php",
         "APP_PACKAGES_CACHE": "/tmp/cache/packages.php",
-        "DB_CONNECTION": "mysql",
-        "DB_HOST": "mysql-19fd1f7a-shajinsajeev33-9959.g.aivencloud.com",
-        "DB_PORT": "26596",
-        "DB_DATABASE": "defaultdb",
-        "DB_USERNAME": "avnadmin",
-        "DB_PASSWORD": "AVNS_QRtU05ismu7ATHSyaTg",
-        "APP_KEY": "base64:rqSvOI3E3a0m2m6q2rhGomV7Cjw40cInyw/0AUcS+tE=",
-        "APP_URL": "https://alrabie-dryfruits-cashews.vercel.app",
         "DB_SSL_VERIFY": "false"
     },
     "routes": [
