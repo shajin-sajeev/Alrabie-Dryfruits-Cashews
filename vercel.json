@@ -6,6 +6,18 @@
             "runtime": "vercel-php@0.9.0"
         }
     },
+    "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "true",
+        "LOG_CHANNEL": "stderr",
+        "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
+        "SESSION_DRIVER": "cookie",
+        "CACHE_STORE": "array",
+        "APP_CONFIG_CACHE": "/tmp/cache/config.php",
+        "APP_ROUTES_CACHE": "/tmp/cache/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/cache/services.php",
+        "APP_PACKAGES_CACHE": "/tmp/cache/packages.php"
+    },
     "routes": [
         {
             "src": "/build/(.*)",
