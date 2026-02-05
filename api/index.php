@@ -1,21 +1,21 @@
 <?php
 
 // Fix for Vercel's read-only filesystem
-if (isset($_SERVER['VERCEL_URL'])) {
-    $storagePath = '/tmp/storage';
-    $cachePath = '/tmp/cache';
+$storagePath = '/tmp/storage';
+$cachePath = '/tmp/cache';
 
-    foreach (
-        [
-            $storagePath . '/framework/views',
-            $storagePath . '/framework/cache',
-            $storagePath . '/framework/sessions',
-            $storagePath . '/logs',
-            $cachePath,
-        ] as $path
-    ) {
-        if (!is_dir($path)) {
-            mkdir($path, 0755, true);
+foreach (
+    [
+        $storagePath . '/framework/views',
+        $storagePath . '/framework/cache',
+        $storagePath . '/framework/sessions',
+        $storagePath . '/logs',
+        $cachePath,
+    ] as $path
+) {
+    if (!is_dir($path)) {
+        if (!mkdir($path, 0777, true) && !is_dir($path)) {
+            error_log("Failed to create directory: $path");
         }
     }
 }
