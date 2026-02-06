@@ -3,6 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 
+Route::get('/debug-config', function () {
+    return [
+        'default_db' => config('database.default'),
+        'db_connection_env' => env('DB_CONNECTION'),
+        'vercel_env' => env('VERCEL'),
+        'database_url' => env('DATABASE_URL') ? 'Set' : 'Not Set',
+        'postgres_url' => env('POSTGRES_URL') ? 'Set' : 'Not Set',
+    ];
+});
+
 Route::get('/test-route', function () {
     return 'Routing is working!';
 });

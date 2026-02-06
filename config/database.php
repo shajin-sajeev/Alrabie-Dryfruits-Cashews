@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => env('VERCEL') ? 'pgsql' : env('DB_CONNECTION', 'mysql'),
+    'default' => 'pgsql',
     'connections' => [
         'pgsql' => [
             'driver' => 'pgsql',
