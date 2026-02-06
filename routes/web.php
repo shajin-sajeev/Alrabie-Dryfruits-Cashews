@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 
+Route::get('/test-route', function () {
+    return 'Routing is working!';
+});
+
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/category/{slug}', 'category')->name('category');
