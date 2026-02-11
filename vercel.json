@@ -18,7 +18,7 @@
         "APP_SERVICES_CACHE": "/tmp/cache/services.php",
         "APP_PACKAGES_CACHE": "/tmp/cache/packages.php",
         "DB_SSL_VERIFY": "false",
-        "DB_CONNECTION": "mysql"
+        "DB_CONNECTION": "pgsql"
     },
     "routes": [
         {
