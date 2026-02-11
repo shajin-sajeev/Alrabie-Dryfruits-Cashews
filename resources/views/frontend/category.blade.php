@@ -12,15 +12,15 @@
 </div>
 
 <!-- Category Header -->
-<header class="category-header-banner" style="padding: 2rem; max-width: 1400px; margin: 0 auto;">
-    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 4rem; display: flex; gap: 5rem; align-items: center; position: relative; overflow: hidden; box-shadow: var(--shadow-sm);">
+<header class="category-header-banner" style="padding: 1rem; max-width: 1400px; margin: 0 auto;">
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; display: flex; gap: 3rem; align-items: center; position: relative; overflow: hidden; box-shadow: var(--shadow-sm);">
         <!-- Backdrop Glow -->
         <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: var(--primary-glow); filter: blur(80px); opacity: 0.15; z-index: 0; pointer-events: none;"></div>
 
         @if ($category->image)
         <div style="position: relative; z-index: 1; flex-shrink: 0;">
             <div style="position: relative;">
-                <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" style="width: 320px; height: 320px; border-radius: 24px; object-fit: cover; box-shadow: var(--shadow-lg); position: relative; z-index: 2;">
+                <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" style="width: 200px; height: 200px; border-radius: 16px; object-fit: cover; box-shadow: var(--shadow-lg); position: relative; z-index: 2;">
                 <!-- Decorative element behind image -->
                 <div style="position: absolute; top: 20px; right: -20px; bottom: -20px; left: 20px; border: 2px solid var(--primary-color); border-radius: 24px; opacity: 0.15; z-index: 1;"></div>
             </div>
@@ -33,8 +33,8 @@
                 <div style="height: 1px; width: 40px; background: var(--border-color);"></div>
             </div>
 
-            <h1 style="font-size: 4rem; font-weight: 900; color: var(--text-main); margin-bottom: 1.5rem; letter-spacing: -0.03em; line-height: 1;">{{ $category->name }}</h1>
-            <p style="color: var(--text-muted); font-size: 1.25rem; line-height: 1.7; max-width: 650px; margin-bottom: 2.5rem; font-weight: 400;">{{ $category->description ?? 'Discover our hand-picked selection of the finest ' . strtolower($category->name) . ' from around the globe, curated for quality and taste.' }}</p>
+            <h1 style="font-size: 2.5rem; font-weight: 900; color: var(--text-main); margin-bottom: 1rem; letter-spacing: -0.03em; line-height: 1;">{{ $category->name }}</h1>
+            <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6; max-width: 500px; margin-bottom: 1.5rem; font-weight: 400;">{{ $category->description ?? 'Discover our hand-picked selection of the finest ' . strtolower($category->name) . ' from around the globe, curated for quality and taste.' }}</p>
 
             <div style="display: flex; gap: 3rem;">
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
@@ -62,7 +62,7 @@
 </header>
 
 <!-- Products Section -->
-<section class="products-section" style="padding-top: 0;">
+<section class="products-section" style="margin-top: 0;">
     <div class="products-grid">
         @forelse ($products as $product)
         <x-product-card :product="$product" />
