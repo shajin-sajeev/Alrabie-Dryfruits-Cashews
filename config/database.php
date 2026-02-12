@@ -28,7 +28,7 @@ return [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL', env('POSTGRES_URL')),
             'host' => env('DB_HOST', env('POSTGRES_HOST', '127.0.0.1')),
-            'port' => env('DB_PORT', 5432),
+            'port' => env('DB_PORT') && env('DB_PORT') != 3306 ? env('DB_PORT') : env('POSTGRES_PORT', 5432),
             'database' => env('DB_DATABASE', env('POSTGRES_DATABASE', 'forge')),
             'username' => env('DB_USERNAME', env('POSTGRES_USER', 'forge')),
             'password' => env('DB_PASSWORD', env('POSTGRES_PASSWORD', '')),
@@ -36,7 +36,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'schema' => 'public',
-            'sslmode' => 'prefer',
+            'sslmode' => 'require',
         ],
     ],
 ];
