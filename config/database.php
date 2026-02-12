@@ -28,7 +28,7 @@ return [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
+            'database' => env('DB_DATABASE', 'forge') . (str_contains(env('DB_HOST', ''), 'neon.tech') ? "' options='endpoint=" . explode('.', env('DB_HOST', ''))[0] : ""),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
