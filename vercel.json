@@ -20,7 +20,12 @@
         "APP_SERVICES_CACHE": "/tmp/cache/services.php",
         "APP_PACKAGES_CACHE": "/tmp/cache/packages.php",
         "DB_SSL_VERIFY": "false",
-        "DB_CONNECTION": "pgsql"
+        "DB_CONNECTION": "pgsql",
+        "DB_HOST": "ep-plain-bird-ai5s9cny-pooler.c-4.us-east-1.aws.neon.tech",
+        "DB_PORT": "5432",
+        "DB_DATABASE": "alrabie_dry_fruits_and_nuts",
+        "DB_USERNAME": "ep-plain-bird-ai5s9cny-pooler$neondb_owner",
+        "DB_PASSWORD": "npg_IJD2F6sHXCKv"
     },
     "routes": [
         {

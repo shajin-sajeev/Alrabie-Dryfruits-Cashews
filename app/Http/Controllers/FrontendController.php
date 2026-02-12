@@ -38,9 +38,9 @@ class FrontendController extends Controller
         $query = $request->get('q');
         $categories = Category::all();
         $products = Product::where(function ($q) use ($query) {
-                $q->where('name', 'like', "%{$query}%")
-                  ->orWhere('description', 'like', "%{$query}%");
-            })
+            $q->where('name', 'ilike', "%{$query}%")
+                ->orWhere('description', 'ilike', "%{$query}%");
+        })
             ->with('category')
             ->paginate(12);
         return view('frontend.search', compact('products', 'categories', 'query'));
