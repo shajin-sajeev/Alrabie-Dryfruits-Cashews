@@ -8,7 +8,9 @@
     },
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
+        "APP_DEBUG": "false",
+        "APP_KEY": "base64:/urxw66m29AsY16uRM9/gU3yVEL0RwDyOWNTomp57Ao=",
+        "APP_URL": "https://alrabie-dryfruits-cashews.vercel.app",
         "LOG_CHANNEL": "stderr",
         "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
         "SESSION_DRIVER": "cookie",
