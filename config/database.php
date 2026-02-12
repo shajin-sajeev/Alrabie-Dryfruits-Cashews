@@ -35,8 +35,10 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'prefer',
-            'url' => env('DATABASE_URL'),
+            'sslmode' => 'require',
+            'options' => [
+                '--endpoint=ep-plain-bird-ai5s9cny-pooler',
+            ],
         ],
     ],
 ];
