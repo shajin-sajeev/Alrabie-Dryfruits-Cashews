@@ -30,7 +30,7 @@ return [
             'port' => 5432,
             'database' => 'alrabie_dry_fruits_and_nuts',
             'username' => 'ep-plain-bird-ai5s9cny-pooler$neondb_owner',
-            'password' => '',
+            'password' => 'npg_IJD2F6sHXCKv',
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
