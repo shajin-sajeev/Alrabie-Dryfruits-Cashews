@@ -26,21 +26,16 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL', env('POSTGRES_URL')),
-            'host' => env('DB_HOST', env('POSTGRES_HOST', '127.0.0.1')),
-            'port' => env('DB_PORT') && env('DB_PORT') != 3306 ? env('DB_PORT') : env('POSTGRES_PORT', 5432),
-            'database' => env('DB_DATABASE', env('POSTGRES_DATABASE', 'forge')),
-            'username' => env('DB_USERNAME', env('POSTGRES_USER', 'forge')),
-            'password' => env('DB_PASSWORD', env('POSTGRES_PASSWORD', '')),
+            'host' => 'ep-plain-bird-ai5s9cny-pooler.c-4.us-east-1.aws.neon.tech',
+            'port' => 5432,
+            'database' => 'alrabie_dry_fruits_and_nuts',
+            'username' => 'ep-plain-bird-ai5s9cny-pooler$neondb_owner',
+            'password' => '',
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'schema' => 'public',
+            'search_path' => 'public',
             'sslmode' => 'require',
-            // Neon specific requirement for older client libraries
-            'options' => [
-                'endpoint' => env('POSTGRES_ENDPOINT_ID'),
-            ],
         ],
     ],
 ];
