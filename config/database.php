@@ -26,6 +26,7 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
+            'url' => 'postgres://ep-plain-bird-ai5s9cny-pooler$neondb_owner:npg_IJD2F6sHXCKv@ep-plain-bird-ai5s9cny-pooler.c-4.us-east-1.aws.neon.tech/alrabie_dry_fruits_and_nuts?options=endpoint%3Dep-plain-bird-ai5s9cny-pooler&sslmode=require',
             'host' => 'ep-plain-bird-ai5s9cny-pooler.c-4.us-east-1.aws.neon.tech',
             'port' => 5432,
             'database' => 'alrabie_dry_fruits_and_nuts',
