@@ -9,6 +9,7 @@ foreach (
         $storagePath . '/framework/views',
         $storagePath . '/framework/cache',
         $storagePath . '/framework/sessions',
+        $storagePath . '/app/public',
         $storagePath . '/logs',
         $cachePath,
     ] as $path
