@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL & ~E_DEPRECATED);
 
 // Fix for Vercel's read-only filesystem
 $storagePath = '/tmp/storage';
