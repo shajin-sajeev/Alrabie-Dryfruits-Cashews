@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/debug-config', function () {
     return [
@@ -16,6 +17,11 @@ Route::get('/test-route', function () {
     return 'Routing is working!';
 });
 
+Route::get('/run-migrations', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return Artisan::output();
+});
+
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/category/{slug}', 'category')->name('category');
@@ -23,8 +29,6 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/search', 'search')->name('search');
 });
 
-// Temporary Database Management Routes - DELETE THESE AFTER SUCCESSFUL SETUP
-use Illuminate\Support\Facades\Artisan;
 
 Route::get('/db-migrate', function () {
     try {
