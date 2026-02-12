@@ -37,6 +37,10 @@ return [
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'require',
+            // Neon specific requirement for older client libraries
+            'options' => [
+                'endpoint' => env('POSTGRES_ENDPOINT_ID'),
+            ],
         ],
     ],
 ];
