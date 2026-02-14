@@ -37,11 +37,9 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'require',
-            'options' => array_filter([
-                'endpoint' => (str_contains(env('DB_HOST', ''), 'neon.tech')
-                    ? explode('.', str_replace('-pooler', '', env('DB_HOST', '')))[0]
-                    : null),
-            ]),
+            'options' => (str_contains(env('DB_HOST', ''), 'neon.tech')
+                ? "endpoint=" . explode('.', str_replace('-pooler', '', env('DB_HOST', '')))[0]
+                : null),
         ],
     ],
 ];
