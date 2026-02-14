@@ -13,38 +13,6 @@ Route::get('/debug-config', function () {
     ];
 });
 
-Route::get('/db-test', function () {
-    try {
-        $result = \Illuminate\Support\Facades\DB::select('SELECT version()');
-        $tables = \Illuminate\Support\Facades\DB::select("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'");
-        return response()->json([
-            'status' => 'success',
-            'version' => $result[0],
-            'tables' => $tables,
-            'connection' => config('database.default'),
-            'host' => config('database.connections.pgsql.host'),
-        ]);
-    } catch (\Throwable $e) {
-        return response()->json([
-            'status' => 'error',
-            'message' => $e->getMessage(),
-            'trace' => $e->getTraceAsString(),
-        ], 500);
-    }
-});
-
-Route::get('/test-route', function () {
-    return 'Routing is working!';
-});
-
-Route::get('/run-migrations', function () {
-    try {
-        Artisan::call('migrate', ['--force' => true]);
-        return "Migrations completed!<br><pre>" . Artisan::output() . "</pre>";
-    } catch (\Throwable $e) {
-        return "Run-Migrations Failed!<br>Error: " . $e->getMessage() . "<br>Trace:<br><pre>" . $e->getTraceAsString() . "</pre>";
-    }
-});
 
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
@@ -60,35 +28,5 @@ Route::get('/db-migrate', function () {
         return "Migrations completed successfully!<br><pre>" . Artisan::output() . "</pre>";
     } catch (\Throwable $e) {
         return "Error running migrations: " . $e->getMessage() . "<br>Trace:<br><pre>" . $e->getTraceAsString() . "</pre>";
-    }
-});
-
-Route::get('/db-seed', function () {
-    try {
-        Artisan::call('db:seed', ['--force' => true]);
-        return "Seeding completed successfully!<br><pre>" . Artisan::output() . "</pre>";
-    } catch (\Exception $e) {
-        return "Error running seeders: " . $e->getMessage();
-    }
-});
-
-Route::get('/db-fresh-seed', function () {
-    try {
-        Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
-        return "Database refreshed and seeded successfully!<br><pre>" . Artisan::output() . "</pre>";
-    } catch (\Throwable $e) {
-        return "Error refreshing database: " . $e->getMessage() . "<br>Trace:<br><pre>" . $e->getTraceAsString() . "</pre>";
-    }
-});
-
-Route::get('/clear-cache', function () {
-    try {
-        Artisan::call('cache:clear');
-        Artisan::call('config:clear');
-        Artisan::call('view:clear');
-        Artisan::call('route:clear');
-        return "All caches cleared successfully!";
-    } catch (\Exception $e) {
-        return "Error clearing cache: " . $e->getMessage();
     }
 });
