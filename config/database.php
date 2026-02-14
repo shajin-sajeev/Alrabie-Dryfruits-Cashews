@@ -28,18 +28,16 @@ return [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
+            'port' => env('DB_PORT', '5432') . (str_contains(env('DB_HOST', ''), 'neon.tech') ? ";options='endpoint=" . explode('.', str_replace('-pooler', '', env('DB_HOST', '')))[0] . "'" : ""),
             'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
+            'username' => (str_contains(env('DB_HOST', ''), 'neon.tech') ? explode('.', str_replace('-pooler', '', env('DB_HOST', '')))[0] . '$' : '') . env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'require',
-            'options' => (str_contains(env('DB_HOST', ''), 'neon.tech')
-                ? "endpoint=" . explode('.', str_replace('-pooler', '', env('DB_HOST', '')))[0]
-                : null),
+            'options' => [],
         ],
     ],
 ];
