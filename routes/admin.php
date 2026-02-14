@@ -18,6 +18,9 @@ Route::prefix('admin')->group(function () {
         // Google Auth
         Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('admin.auth.google');
         Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('admin.auth.google.callback');
+        Route::get('/auth/google/under-development', function () {
+            return view('admin.under-development');
+        })->name('admin.auth.google.dev');
     });
 
     // Logout Route
