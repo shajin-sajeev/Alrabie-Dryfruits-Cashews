@@ -38,15 +38,18 @@ class ProfileController extends Controller
         }
 
         if ($request->hasFile('profile_picture')) {
-            // Delete old picture if exists
-            if ($admin->profile_picture && File::exists(public_path($admin->profile_picture))) {
-                File::delete(public_path($admin->profile_picture));
-            }
-
             $image = $request->file('profile_picture');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/profile'), $imageName);
-            $data['profile_picture'] = 'uploads/profile/' . $imageName;
+            
+            // Encode image as Base64
+            $imageData = base64_encode(File::get($image->getPathname()));
+            $base64 = 'data:' . $image->getMimeType() . ';base64,' . $imageData;
+            
+            $data['profile_picture'] = $base64;
+            
+            // Attempt to delete old file if it was a real file (not base64)
+            if ($admin->profile_picture && !str_starts_with($admin->profile_picture, 'data:') && File::exists(public_path($admin->profile_picture))) {
+                @File::delete(public_path($admin->profile_picture));
+            }
         }
 
         $admin->update($data);
