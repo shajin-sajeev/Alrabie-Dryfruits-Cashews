@@ -130,6 +130,9 @@
 
         <div class="footer-bottom">
             <p>&copy; {{ date('Y') }} Al Rabie Dry Fruits & Cashews. Crafted for excellence.</p>
+            <div class="admin-portal-access" onclick="requestAdminAccess()" style="cursor: pointer; opacity: 0.5; font-size: 0.75rem; margin-top: 0.5rem; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">
+                <i class="fas fa-shield-halved"></i> <span>Staff Direct</span>
+            </div>
         </div>
     </footer>
 

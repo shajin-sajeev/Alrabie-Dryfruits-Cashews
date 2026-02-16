@@ -374,3 +374,57 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// ===================================
+// SECRET ADMIN ACCESS
+// ===================================
+
+async function requestAdminAccess() {
+    // Dynamic import SweetAlert2 if not already present
+    if (typeof Swal === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/sweetalert2@11';
+        document.head.appendChild(script);
+        await new Promise(resolve => script.onload = resolve);
+    }
+
+    const { value: code } = await Swal.fire({
+        title: 'Secure Access',
+        input: 'password',
+        inputPlaceholder: 'Enter Entry Code',
+        showCancelButton: true,
+        confirmButtonText: 'Access Portal',
+        cancelButtonText: 'Cancel',
+        reverseButtons: true,
+        customClass: {
+            popup: 'admin-access-modal',
+            input: 'admin-access-input',
+            confirmButton: 'swal2-confirm',
+            cancelButton: 'swal2-cancel'
+        },
+        buttonsStyling: false,
+        backdrop: `rgba(6, 78, 59, 0.4)`
+    });
+
+    if (code) {
+        if (code === 'adminpannelaccessonly') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Access Granted',
+                text: 'Redirecting to Admin Portal...',
+                timer: 1500,
+                showConfirmButton: false,
+                willClose: () => {
+                    window.location.href = '/admin/login';
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Access Denied',
+                text: 'The code you entered is invalid.',
+                confirmButtonColor: '#10b981'
+            });
+        }
+    }
+}
