@@ -87,7 +87,7 @@
                 <div class="social-links" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
                     <a href="https://www.instagram.com/alrabie_dryfruits?igsh=MW5zb2NqYjl4enp1cg==" target="_blank"><i class="fab fa-instagram"></i></a>    
                     <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="https://wa.me/8075615183" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/918075615183" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
 

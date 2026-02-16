@@ -78,9 +78,17 @@ function initializeAdminFeatures() {
     const sidebar = document.querySelector('.admin-sidebar');
     
     if (toggleBtn && sidebar) {
+        const overlay = document.querySelector('.sidebar-overlay');
+        
         toggleBtn.addEventListener('click', () => {
             sidebar.classList.toggle('active');
         });
+
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+            });
+        }
     }
 
     // Close sidebar when clicking on a link
@@ -92,6 +100,25 @@ function initializeAdminFeatures() {
             }
         });
     });
+
+    // Profile Dropdown Toggle
+    const profileTrigger = document.getElementById('profileDropdownTrigger');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    if (profileTrigger && profileDropdown) {
+        profileTrigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            profileDropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!profileTrigger.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileTrigger.classList.remove('active');
+                profileDropdown.classList.remove('show');
+            }
+        });
+    }
 
     // Active menu highlighting
     const currentLocation = location.pathname;

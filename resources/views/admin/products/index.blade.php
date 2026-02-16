@@ -420,8 +420,7 @@
 
 
     <!-- Bulk Actions Section -->
-    <div class="bulk-actions-section" id="bulkActionsSection"
-        style="background: #f3f4f6; padding: 1rem; border-radius: 0.75rem; margin-bottom: 1.5rem; display: none; align-items: center; justify-content: space-between;">
+    <div class="bulk-actions-section" id="bulkActionsSection" style="display: none;">
         <div style="display: flex; align-items: center; gap: 1rem;">
             <span id="bulkSelectedCount" style="font-weight: 600; color: var(--text-dark);">0 products selected</span>
             <button type="button" id="selectAllBtn" class="btn"

@@ -86,20 +86,51 @@
             <!-- Top Header -->
             <header class="admin-header">
                 <div class="header-left">
-                    <h1 class="page-title">@yield('admin-title', 'Dashboard')</h1>
-                    <p class="page-subtitle">@yield('admin-subtitle', 'Welcome back, ' . (Auth::user()->name ?? 'Admin'))</p>
+                    <button class="sidebar-toggle btn-icon shadow-sm" aria-label="Toggle Sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="title-meta">
+                        <h1 class="page-title">@yield('admin-title', 'Dashboard')</h1>
+                        <p class="page-subtitle">@yield('admin-subtitle', 'Welcome back, ' . (Auth::user()->name ?? 'Admin'))</p>
+                    </div>
                 </div>
 
                 <div class="header-right">
-                    <div class="admin-user-info">
-                        <div class="user-avatar shadow-sm">
-                            <i class="fas fa-user-tie"></i>
+                    <div class="admin-user-nav">
+                        <div class="user-profile-trigger" id="profileDropdownTrigger">
+                            <div class="user-avatar shadow-sm">
+                                @if(Auth::user()->profile_picture)
+                                    <img src="{{ asset(Auth::user()->profile_picture) }}" alt="{{ Auth::user()->name }}">
+                                @else
+                                    <i class="fas fa-user-tie"></i>
+                                @endif
+                            </div>
+                            <div class="user-details">
+                                <p class="user-name">{{ Auth::user()->name ?? 'Administrator' }}</p>
+                                <p class="user-role">Master Admin</p>
+                            </div>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
                         </div>
-                        <div class="user-details">
-                            <p class="user-name">{{ Auth::user()->name ?? 'Administrator' }}</p>
-                            <p class="user-role">Master Admin</p>
+
+                        <div class="profile-dropdown shadow-lg" id="profileDropdown">
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ route('admin.profile.edit') }}" class="dropdown-item">
+                                        <i class="fas fa-user-circle"></i>
+                                        <span>My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.logout') }}" class="dropdown-item logout-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                        <i class="fas fa-chevron-down" style="font-size: 0.75rem; color: var(--text-muted); margin-left: 0.75rem;"></i>
                     </div>
                 </div>
             </header>
@@ -132,6 +163,7 @@
                 @yield('admin-content')
             </div>
         </main>
+        <div class="sidebar-overlay"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>

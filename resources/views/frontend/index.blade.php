@@ -198,7 +198,7 @@
                     <div class="info-details">
                         <h3>Instant Concierge</h3>
                         <p>Message us on WhatsApp for 24/7 priority support.</p>
-                        <a href="https://wa.me/8075615183" target="_blank" class="info-link">Start Priority Chat</a>
+                        <a href="https://wa.me/918075615183" target="_blank" class="info-link">Start Priority Chat</a>
                     </div>
                 </div>
 

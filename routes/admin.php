@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\GoogleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProfileController;
 
 Route::prefix('admin')->group(function () {
     // Auth Routes - Only for unauthenticated admins
@@ -38,5 +39,9 @@ Route::prefix('admin')->group(function () {
 
         // Product Routes
         Route::resource('products', ProductController::class, ['as' => 'admin']);
+
+        // Profile Routes
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+        Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
     });
 });
