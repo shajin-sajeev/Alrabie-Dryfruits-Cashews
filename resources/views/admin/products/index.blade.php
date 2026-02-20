@@ -467,7 +467,7 @@
                         </td>
                         <td>
                             @if ($product->image)
-                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($product->image) }}" alt="{{ $product->name }}">
                             @else
                                 <div
                                     style="width: 48px; height: 48px; background: var(--bg-main); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-color);">

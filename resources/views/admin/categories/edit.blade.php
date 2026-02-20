@@ -60,7 +60,7 @@
 
             <div class="image-preview" id="image-preview-container" style="{{ $category->image ? 'display: block;' : '' }}">
                 @if ($category->image)
-                <img src="{{ asset($category->image) }}" alt="{{ $category->name }}">
+                <img src="{{ \Illuminate\Support\Facades\Storage::url($category->image) }}" alt="{{ $category->name }}">
                 @endif
             </div>
 

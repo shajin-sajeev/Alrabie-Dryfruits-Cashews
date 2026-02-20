@@ -31,8 +31,9 @@ class CategoryController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/products'), $filename);
-            $validated['image'] = 'images/products/' . $filename;
+            // Store using Storage facade
+            $path = $file->storeAs('images/products', $filename, 'public');
+            $validated['image'] = $path;
         }
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -56,13 +57,15 @@ class CategoryController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($category->image && file_exists(public_path($category->image))) {
-                unlink(public_path($category->image));
+            // Delete old image using Storage facade
+            if ($category->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($category->image)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($category->image);
             }
+            
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/products'), $filename);
-            $validated['image'] = 'images/products/' . $filename;
+            $path = $file->storeAs('images/products', $filename, 'public');
+            $validated['image'] = $path;
         }
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -74,8 +77,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        if ($category->image && file_exists(public_path($category->image))) {
-            unlink(public_path($category->image));
+        if ($category->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($category->image)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($category->image);
         }
         $category->delete();
 

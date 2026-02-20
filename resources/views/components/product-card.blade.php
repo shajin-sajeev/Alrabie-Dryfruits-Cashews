@@ -6,7 +6,7 @@
     <!-- Product Image Container -->
     <div class="product-image-container">
         @if ($product->image)
-        <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="product-image">
+        <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="product-image">
         @else
         <div class="product-image-placeholder" style="display: flex; align-items: center; justify-content: center; height: 100%; background: var(--bg-card); color: var(--text-muted);">
             <i class="fas fa-image" style="font-size: 3rem; opacity: 0.2;"></i>

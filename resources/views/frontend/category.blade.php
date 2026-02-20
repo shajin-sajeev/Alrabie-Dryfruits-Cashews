@@ -20,7 +20,7 @@
         @if ($category->image)
         <div style="position: relative; z-index: 1; flex-shrink: 0;">
             <div style="position: relative;">
-                <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" style="width: 200px; height: 200px; border-radius: 16px; object-fit: cover; box-shadow: var(--shadow-lg); position: relative; z-index: 2;">
+                <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}" style="width: 200px; height: 200px; border-radius: 16px; object-fit: cover; box-shadow: var(--shadow-lg); position: relative; z-index: 2;">
                 <!-- Decorative element behind image -->
                 <div style="position: absolute; top: 20px; right: -20px; bottom: -20px; left: 20px; border: 2px solid var(--primary-color); border-radius: 24px; opacity: 0.15; z-index: 1;"></div>
             </div>

@@ -35,7 +35,7 @@
                 </td>
                 <td>
                     @if ($category->image)
-                    <img src="{{ asset($category->image) }}" alt="{{ $category->name }}">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($category->image) }}" alt="{{ $category->name }}">
                     @else
                     <div style="width: 48px; height: 48px; background: var(--bg-main); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-color);">
                         <i class="fas fa-image" style="color: var(--text-muted);"></i>

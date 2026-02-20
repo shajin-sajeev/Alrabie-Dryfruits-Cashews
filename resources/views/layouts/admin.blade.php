@@ -100,7 +100,7 @@
                         <div class="user-profile-trigger" id="profileDropdownTrigger">
                             <div class="user-avatar shadow-sm">
                                 @if(Auth::user()->profile_picture)
-                                    <img src="{{ str_starts_with(Auth::user()->profile_picture, 'data:') ? Auth::user()->profile_picture : asset(Auth::user()->profile_picture) }}" alt="{{ Auth::user()->name }}">
+                                    <img src="{{ str_starts_with(Auth::user()->profile_picture, 'data:') ? Auth::user()->profile_picture : \Illuminate\Support\Facades\Storage::url(Auth::user()->profile_picture) }}" alt="{{ Auth::user()->name }}">
                                 @else
                                     <i class="fas fa-user-tie"></i>
                                 @endif

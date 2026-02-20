@@ -46,8 +46,9 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/products'), $filename);
-            $validated['image'] = 'images/products/' . $filename;
+            // Store directly in 'products' folder on the public disk
+            $path = $file->storeAs('images/products', $filename, 'public');
+            $validated['image'] = $path;
         }
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -76,13 +77,15 @@ class ProductController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($product->image && file_exists(public_path($product->image))) {
-                unlink(public_path($product->image));
+            // Delete old image using Storage facade
+            if ($product->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($product->image);
             }
+            
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/products'), $filename);
-            $validated['image'] = 'images/products/' . $filename;
+            $path = $file->storeAs('images/products', $filename, 'public');
+            $validated['image'] = $path;
         }
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -94,8 +97,8 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        if ($product->image && file_exists(public_path($product->image))) {
-            unlink(public_path($product->image));
+        if ($product->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($product->image);
         }
         $product->delete();
         
