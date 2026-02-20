@@ -8,12 +8,13 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * Creates profile_picture as `text` column so no separate ALTER migration is needed.
      */
     public function up(): void
     {
         if (!Schema::hasColumn('admins', 'profile_picture')) {
-            Schema::table('admins', function (Blueprint $col) {
-                $col->string('profile_picture')->nullable()->after('email');
+            Schema::table('admins', function (Blueprint $table) {
+                $table->text('profile_picture')->nullable()->after('email');
             });
         }
     }
@@ -24,8 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         if (Schema::hasColumn('admins', 'profile_picture')) {
-            Schema::table('admins', function (Blueprint $col) {
-                $col->dropColumn('profile_picture');
+            Schema::table('admins', function (Blueprint $table) {
+                $table->dropColumn('profile_picture');
             });
         }
     }
