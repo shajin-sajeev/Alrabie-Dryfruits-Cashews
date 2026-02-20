@@ -13,7 +13,7 @@
             <div class="profile-pic-wrapper">
                 <div class="profile-pic-preview" id="profilePicPreview">
                     @if($admin->profile_picture)
-                        <img src="{{ str_starts_with($admin->profile_picture, 'data:') ? $admin->profile_picture : \Illuminate\Support\Facades\Storage::url($admin->profile_picture) }}" alt="{{ $admin->name }}" id="previewImg">
+                        <img src="{{ $admin->profile_picture }}" alt="{{ $admin->name }}" id="previewImg">
                     @else
                         <div class="avatar-placeholder">
                             <i class="fas fa-user-tie"></i>

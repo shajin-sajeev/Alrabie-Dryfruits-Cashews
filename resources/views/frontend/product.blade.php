@@ -19,7 +19,7 @@
         <!-- Product Image -->
         <div style="padding: 2rem; background: rgba(255, 255, 255, 0.02); display: flex; align-items: center; justify-content: center; position: relative;">
             @if ($product->image)
-            <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" style="width: 100%; height: auto; border-radius: 16px; box-shadow: var(--shadow-lg);">
+            <img src="{{ $product->image }}" alt="{{ $product->name }}" style="width: 100%; height: auto; border-radius: 16px; box-shadow: var(--shadow-lg);">
             @else
             <div style="width: 100%; aspect-ratio: 1; border-radius: 16px; background: var(--bg-card); display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-color);">
                 <i class="fas fa-image" style="font-size: 5rem; opacity: 0.1;"></i>

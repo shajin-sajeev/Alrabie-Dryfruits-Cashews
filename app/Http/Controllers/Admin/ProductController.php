@@ -7,22 +7,22 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     /**
-     * Returns the configured default filesystem disk name.
-     * Uses FILESYSTEM_DISK env var — 's3' on Vercel, 'public' locally.
+     * Convert an uploaded file to a Base64 data URI.
+     * This is stored in the database so images persist across Vercel's stateless instances.
      */
-    private function storageDisk(): string
+    private function encodeImageAsBase64(\Illuminate\Http\UploadedFile $file): string
     {
-        return config('filesystems.default', 'public');
+        $data = base64_encode(file_get_contents($file->getPathname()));
+        return 'data:' . $file->getMimeType() . ';base64,' . $data;
     }
 
     public function index(Request $request)
     {
-        $query = Product::with('category');
+        $query      = Product::with('category');
         $categories = Category::all();
 
         if ($request->has('categories') && !empty($request->categories)) {
@@ -48,16 +48,13 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
             'category_id' => 'required|exists:categories,id',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'quantity'    => 'required|integer|min:0',
             'unit'        => 'required|string|max:50',
         ]);
 
         if ($request->hasFile('image')) {
-            $file     = $request->file('image');
-            $filename = time() . '_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
-            $path     = $file->storeAs('images/products', $filename, $this->storageDisk());
-            $validated['image'] = $path;
+            $validated['image'] = $this->encodeImageAsBase64($request->file('image'));
         }
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -80,21 +77,13 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
             'category_id' => 'required|exists:categories,id',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'quantity'    => 'required|integer|min:0',
             'unit'        => 'required|string|max:50',
         ]);
 
         if ($request->hasFile('image')) {
-            // Delete old image from the configured disk
-            if ($product->image) {
-                Storage::disk($this->storageDisk())->delete($product->image);
-            }
-
-            $file     = $request->file('image');
-            $filename = time() . '_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
-            $path     = $file->storeAs('images/products', $filename, $this->storageDisk());
-            $validated['image'] = $path;
+            $validated['image'] = $this->encodeImageAsBase64($request->file('image'));
         }
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -106,9 +95,6 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        if ($product->image) {
-            Storage::disk($this->storageDisk())->delete($product->image);
-        }
         $product->delete();
 
         if (request()->expectsJson()) {

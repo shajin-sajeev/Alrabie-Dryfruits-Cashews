@@ -120,7 +120,7 @@
 
             <div class="image-preview" id="image-preview-container" style="{{ $product->image ? 'display: block;' : '' }}">
                 @if ($product->image)
-                <img src="{{ \Illuminate\Support\Facades\Storage::url($product->image) }}" alt="{{ $product->name }}">
+                <img src="{{ $product->image }}" alt="{{ $product->name }}">
                 @endif
             </div>
 

@@ -99,7 +99,7 @@
         @forelse ($categories as $category)
         <div class="category-card" onclick="window.location.href='{{ route('category', $category->slug) }}'">
             @if ($category->image)
-            <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}" class="category-image">
+            <img src="{{ $category->image }}" alt="{{ $category->name }}" class="category-image">
             @else
             <div class="category-image" style="background: linear-gradient(135deg, #10b981 0%, #064e3b 100%);"></div>
             @endif

@@ -6,17 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
     /**
-     * Returns the configured default filesystem disk name.
-     * Uses FILESYSTEM_DISK env var — 's3' on Vercel, 'public' locally.
+     * Convert an uploaded file to a Base64 data URI.
+     * This is stored in the database so images persist across Vercel's stateless instances.
      */
-    private function storageDisk(): string
+    private function encodeImageAsBase64(\Illuminate\Http\UploadedFile $file): string
     {
-        return config('filesystems.default', 'public');
+        $data = base64_encode(file_get_contents($file->getPathname()));
+        return 'data:' . $file->getMimeType() . ';base64,' . $data;
     }
 
     public function index()
@@ -35,14 +35,11 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name'        => 'required|string|max:255|unique:categories',
             'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
-            $file     = $request->file('image');
-            $filename = time() . '_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
-            $path     = $file->storeAs('images/categories', $filename, $this->storageDisk());
-            $validated['image'] = $path;
+            $validated['image'] = $this->encodeImageAsBase64($request->file('image'));
         }
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -62,19 +59,11 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name'        => 'required|string|max:255|unique:categories,name,' . $category->id,
             'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
-            // Delete old image from the configured disk
-            if ($category->image) {
-                Storage::disk($this->storageDisk())->delete($category->image);
-            }
-
-            $file     = $request->file('image');
-            $filename = time() . '_' . Str::random(6) . '.' . $file->getClientOriginalExtension();
-            $path     = $file->storeAs('images/categories', $filename, $this->storageDisk());
-            $validated['image'] = $path;
+            $validated['image'] = $this->encodeImageAsBase64($request->file('image'));
         }
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -86,9 +75,6 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        if ($category->image) {
-            Storage::disk($this->storageDisk())->delete($category->image);
-        }
         $category->delete();
 
         if (request()->expectsJson()) {
