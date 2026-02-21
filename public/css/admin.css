@@ -1035,38 +1035,57 @@ table img {
     position: relative;
     display: flex;
     align-items: center;
+    background: white;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    transition: all var(--duration);
+    overflow: hidden;
 }
 
 .auth-input-wrapper i {
     position: absolute;
-    left: 1rem;
+    right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
     transition: color var(--duration);
+    width: 1rem;
+    text-align: center;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .auth-form input[type="text"],
 .auth-form input[type="email"],
 .auth-form input[type="password"] {
     width: 100%;
-    padding: 0.875rem 1rem 0.875rem 2.75rem;
-    background: white;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
+    padding: 0.875rem 2.5rem 0.875rem 1rem;
+    background: transparent;
+    border: none;
     font-size: 0.95rem;
     transition: all var(--duration);
     color: var(--text-main);
+    outline: none;
 }
 
 .auth-form input:focus {
     outline: none;
+}
+
+.auth-form input:focus + i,
+.auth-input-wrapper:focus-within i {
+    color: var(--primary-color);
+}
+
+.auth-input-wrapper:focus-within {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 4px var(--primary-glow);
 }
 
-.auth-form input:focus + i {
-    color: var(--primary-color);
+/* Ensure placeholders respect padding */
+.auth-form input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
 }
 
 .auth-form .btn-submit {
@@ -1192,6 +1211,37 @@ table img {
     background: #fef2f2;
     color: #991b1b;
     border: 1px solid #fee2e2;
+}
+
+/* ===== RESPONSIVE AUTH INPUT ICONS ===== */
+@media (max-width: 768px) {
+    .auth-input-wrapper i {
+        right: 0.875rem;
+        font-size: 0.9rem;
+        width: 0.9rem;
+    }
+    
+    .auth-form input[type="text"],
+    .auth-form input[type="email"],
+    .auth-form input[type="password"] {
+        padding: 0.875rem 2rem 0.875rem 0.875rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-input-wrapper i {
+        right: 0.75rem;
+        font-size: 0.85rem;
+        width: 0.85rem;
+    }
+    
+    .auth-form input[type="text"],
+    .auth-form input[type="email"],
+    .auth-form input[type="password"] {
+        padding: 0.875rem 1.75rem 0.875rem 0.75rem;
+        font-size: 0.85rem;
+    }
 }
 
 /* ===== PREMIUM FORM STYLES ===== */
