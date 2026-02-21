@@ -213,7 +213,7 @@ function openContactSellerModal(productName) {
     if (contactNameEl) contactNameEl.textContent = productName;
     
     // Config
-    const businessEmail = 'info@alrabie.com';
+    const businessEmail = 'Alrabiedryfruits@gmail.com';
     const businessPhone = '+918075615183';
     const businessWhatsApp = '918075615183';
     const subject = encodeURIComponent(`Inquiry about ${productName}`);

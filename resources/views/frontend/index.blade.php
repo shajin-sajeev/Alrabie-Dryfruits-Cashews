@@ -180,7 +180,7 @@
                     <div class="info-details">
                         <h3>Mail Inquiry</h3>
                         <p>Our experts will respond within 12 business hours.</p>
-                        <a href="mailto:info@alrabie.com" class="info-link">info@alrabie.com</a>
+                        <a href="mailto:Alrabiedryfruits@gmail.com" class="info-link">Alrabiedryfruits@gmail.com</a>
                     </div>
                 </div>
 

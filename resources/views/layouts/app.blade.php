@@ -114,7 +114,7 @@
                 <ul class="contact-list" style="list-style: none; padding: 0;">
                     <li style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1rem;">
                         <i class="fas fa-envelope" style="color: var(--primary-color);"></i>
-                        <span>info@alrabie.com</span>
+                        <span>Alrabiedryfruits@gmail.com</span>
                     </li>
                     <li style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1rem;">
                         <i class="fas fa-phone" style="color: var(--primary-color);"></i>
