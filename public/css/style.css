@@ -1624,6 +1624,10 @@ textarea {
         gap: 2rem;
     }
 
+    .contact-info {
+        grid-template-columns: 1fr;
+    }
+
     .info-item {
         gap: 1rem;
         padding: 1.2rem;
@@ -1814,6 +1818,25 @@ textarea {
         padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
         border-radius: 12px;
+    }
+
+    /* ===== Hero Carousel ===== */
+    .hero-carousel {
+        height: 50vh;
+        min-height: 300px;
+    }
+
+    .hero-carousel h1 {
+        font-size: 1.4rem;
+    }
+
+    .hero-carousel p {
+        font-size: 0.9rem;
+    }
+
+    .hero-carousel .cta-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
     }
 
     /* ===== Sections ===== */

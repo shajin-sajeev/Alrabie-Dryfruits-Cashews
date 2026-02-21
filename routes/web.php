@@ -16,16 +16,8 @@ Route::get('/debug-config', function () {
 });
 
 
-/*
-|--------------------------------------------------------------------------
-| Storage File Serving Route (Required on Vercel)
-|--------------------------------------------------------------------------
-| On Vercel, /var/task (including public/storage symlink) is read-only.
-| Files are written to /tmp/storage/public/. This route serves them.
-| On local, this route is NOT used — Apache/Nginx serves public/storage directly.
-*/
+
 Route::get('/storage/{path}', function (string $path) {
-    // On local, let the webserver handle it. Only intercept on Vercel.
     if (!env('VERCEL')) {
         abort(404);
     }
